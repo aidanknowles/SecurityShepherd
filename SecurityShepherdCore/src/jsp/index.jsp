@@ -125,18 +125,10 @@ if (request.getSession() != null)
 								 <a id="adminList" href="javascript:;"><div class='menuButton'><fmt:message key="generic.text.admin" /></div></a>
 								<ul id="theAdminList" style="display: none;">
 									<li>
-										<a id="cheatSheetManagementList" href="javascript:;"><fmt:message key="index.link.admin.cheatSheet.manage" /></a>
-										<ul id="theCheatSheetManagementList" style="display: none;">
-											<li><a id="createCheatsLink" href="javascript:;"><fmt:message key="index.link.admin.cheatSheet.manage.create" /></a></li>
-											<li><a id="disableCheatsLink" href="javascript:;"><fmt:message key="index.link.admin.cheatSheet.manage.disable" /></a></li>
-											<li><a id="enableCheatsLink" href="javascript:;"><fmt:message key="index.link.admin.cheatSheet.manage.enable" /></a></li>										
-										</ul>
-									</li>
-									<li>
 										<a id="configurationList" href="javascript:;"><fmt:message key="generic.text.configuration" /></a>
 										<ul id="theConfigurationList" style="display: none;">
 											<li><a id="aboutShepherdLink" href="javascript:;"><fmt:message key="generic.text.aboutSecShep" /></a></li>
-											<li><a id="levelLayoutLink" href="javascript:;"><fmt:message key="index.link.admin.config.change" /></a></li>
+											<li><a id="cheatSheetLink" href="javascript:;"><fmt:message key="index.link.admin.cheatSheet.manage" /></a></li>
 											<li><a id="configureFeedbackLink" href="javascript:;"><fmt:message key="index.link.admin.config.feedback" /></a></li>
 											<li><a id="registrationLink" href="javascript:;"><fmt:message key="index.link.admin.config.openClose" /></a></li>
 											<li><a id="scoreboardLink" href="javascript:;"><fmt:message key="index.link.admin.config.scoreboard" /></a></li>
@@ -146,6 +138,7 @@ if (request.getSession() != null)
 									<li>
 										<a id="moduleManagementList" href="javascript:;"><fmt:message key="index.link.admin.moduleManage" /></a>
 										<ul id="theModuleManagementList" style="display: none;">
+											<li><a id="levelLayoutLink" href="javascript:;"><fmt:message key="index.link.admin.config.change" /></a></li>
 											<li><a id="moduleBlockLink" href="javascript:;"><fmt:message key="index.link.admin.moduleManage.block" /></a></li>
 											<li><a id="setModuleStatusLink" href="javascript:;"><fmt:message key="index.link.admin.moduleManage.openClose" /></a></li>
 											<li><a id="openCloseByCategory" href="javascript:;"><fmt:message key="index.link.admin.moduleManage.openCloseCategory" /></a></li>
@@ -407,48 +400,6 @@ if (request.getSession() != null)
 				});
 			});
 
-			$("#enableCheatsLink").click(function(){
-				$("#submitResult").slideUp("fast", function(){
-					$("#contentDiv").hide("fast", function(){
-						$("#contentDiv").load("admin/cheatManagement/enableCheats.jsp?csrfToken=<%= csrfJsToken %>", function(response, status, xhr) {
-						  if (status == "error") {
-							var msg = "<fmt:message key="generic.text.sorryError" />: ";
-							$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
-						  }
-						  $("#contentDiv").show("fast");
-						});
-					});
-				});	
-			});
-
-			$("#disableCheatsLink").click(function(){
-				$("#submitResult").slideUp("fast", function(){
-					$("#contentDiv").hide("fast", function(){
-						$("#contentDiv").load("admin/cheatManagement/disableCheats.jsp?csrfToken=<%= csrfJsToken %>", function(response, status, xhr) {
-						  if (status == "error") {
-							var msg = "<fmt:message key="generic.text.sorryError" />: ";
-							$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
-						  }
-						  $("#contentDiv").show("fast");
-						});
-					});
-				});	
-			});
-
-			$("#createCheatsLink").click(function(){
-				$("#submitResult").slideUp("fast", function(){
-					$("#contentDiv").hide("fast", function(){
-						$("#contentDiv").load("admin/cheatManagement/createCheat.jsp?csrfToken=<%= csrfJsToken %>", function(response, status, xhr) {
-						  if (status == "error") {
-							var msg = "<fmt:message key="generic.text.sorryError" />: ";
-							$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
-						  }
-						  $("#contentDiv").show("fast");
-						});
-					});	
-				});
-			});
-
 			$("#feedbackLink").click(function(){
 				$("#submitResult").slideUp("fast", function(){
 					$("#contentDiv").hide("fast", function(){
@@ -589,10 +540,24 @@ if (request.getSession() != null)
 				});	
 			});
 			
+			$("#cheatSheetLink").click(function(){
+				$("#submitResult").slideUp("fast", function(){
+					$("#contentDiv").hide("fast", function(){
+						$("#contentDiv").load("admin/config/configCheats.jsp?csrfToken=<%= csrfJsToken %>", function(response, status, xhr) {
+						  if (status == "error") {
+							var msg = "<fmt:message key="generic.text.sorryError" />: ";
+							$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");
+						  }
+						  $("#contentDiv").show("fast");
+						});
+					});
+				});	
+			});
+			
 			$("#levelLayoutLink").click(function(){
 				$("#submitResult").slideUp("fast", function(){
 					$("#contentDiv").hide("fast", function(){
-						$("#contentDiv").load("admin/config/changeLevelLayout.jsp?csrfToken=<%= csrfJsToken %>", function(response, status, xhr) {
+						$("#contentDiv").load("admin/moduleManagement/changeLevelLayout.jsp?csrfToken=<%= csrfJsToken %>", function(response, status, xhr) {
 						  if (status == "error") {
 							var msg = "<fmt:message key="generic.text.sorryError" />: ";
 							$("#contentDiv").html("<p>" + msg + xhr.status + " " + xhr.statusText + "</p>");

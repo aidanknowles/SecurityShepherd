@@ -301,7 +301,7 @@
 	
 	<servlet>
 		<servlet-name>/enableCheats</servlet-name>
-		<servlet-class>servlets.admin.cheatSheet.EnableCheats</servlet-class>
+		<servlet-class>servlets.admin.config.EnableCheats</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>/enableCheats</servlet-name>
@@ -310,7 +310,7 @@
 	
 	<servlet>
 		<servlet-name>/disableCheats</servlet-name>
-		<servlet-class>servlets.admin.cheatSheet.DisableCheats</servlet-class>
+		<servlet-class>servlets.admin.config.DisableCheats</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>/disableCheats</servlet-name>
@@ -318,17 +318,8 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>/createCheat</servlet-name>
-		<servlet-class>servlets.admin.cheatSheet.CreateCheat</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>/createCheat</servlet-name>
-		<url-pattern>/createCheat</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
 		<servlet-name>/getCheat</servlet-name>
-		<servlet-class>servlets.admin.cheatSheet.GetCheat</servlet-class>
+		<servlet-class>servlets.module.GetCheat</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>/getCheat</servlet-name>
@@ -1180,5 +1171,14 @@
 	<servlet-mapping>
 		<servlet-name>/challenges/8c3c35c30cdbbb73b7be3a4f8587aa9d88044dc43e248984a252c6e861f673d4</servlet-name>
 		<url-pattern>/challenges/8c3c35c30cdbbb73b7be3a4f8587aa9d88044dc43e248984a252c6e861f673d4</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>/challenges/7edcbc1418f11347167dabb69fcb54137960405da2f7a90a0684f86c4d45a2e7</servlet-name>
+		<servlet-class>servlets.module.challenge.SqlInjectionStoredProcedure</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/challenges/7edcbc1418f11347167dabb69fcb54137960405da2f7a90a0684f86c4d45a2e7</servlet-name>
+		<url-pattern>/challenges/7edcbc1418f11347167dabb69fcb54137960405da2f7a90a0684f86c4d45a2e7</url-pattern>
 	</servlet-mapping>
 </web-app>

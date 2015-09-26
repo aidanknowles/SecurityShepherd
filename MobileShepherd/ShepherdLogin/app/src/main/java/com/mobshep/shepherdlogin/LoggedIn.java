@@ -39,8 +39,6 @@ public class LoggedIn extends Activity {
         checkNullSession();
     }
 
-
-
     public void getKeyClicked() {
             //return the key
     }
@@ -48,11 +46,12 @@ public class LoggedIn extends Activity {
     private void checkNullSession() {
 
         SharedPreferences prefs = this.getSharedPreferences("Sessions", MODE_PRIVATE);
-        String sessionId = prefs.getString("sessionId", null);
+        String sessionId = prefs.getString("sessionId", "null");
 
-        if (sessionId == null){
-
-            this.finishActivity(0);
+        if (sessionId.equals("null")){
+            finish();
+            Intent intent = new Intent(LoggedIn.this, MainActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -63,8 +62,12 @@ public class LoggedIn extends Activity {
         toEdit.clear();
         toEdit.commit();
 
+        //delete * from sessions table
+
+
+
         checkNullSession();
 
-    }
 
+    }
 }

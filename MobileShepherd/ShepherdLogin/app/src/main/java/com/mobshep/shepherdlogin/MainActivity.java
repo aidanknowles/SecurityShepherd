@@ -8,11 +8,10 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.internal.widget.AppCompatPopupWindow;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,14 +49,25 @@ public class MainActivity extends ActionBarActivity {
 
     TextView tvResponse;
 
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         referenceXML();
 
+        logPrefSession();
+        logProviderSession();
+
+        if (checkSession()) {
+            Intent intent = new Intent(MainActivity.this, LoggedIn.class);
+            startActivity(intent);
+        }
+
+
         //TODO
-        //Remove this.
+        //Remove this and replace with AsyncTask
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         //end remove
@@ -69,6 +79,8 @@ public class MainActivity extends ActionBarActivity {
         addressTest.show();
 
     }
+
+
 
     public void submitClicked(View v) {
 
@@ -171,6 +183,17 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(goToSettings);
                 return true;
 
+            case R.id.action_clearSession:
+
+                storedPref = getSharedPreferences("Sessions", MODE_PRIVATE);
+                toEdit = storedPref.edit();
+                toEdit.clear();
+                toEdit.commit();
+
+                Toast valid = Toast.makeText(MainActivity.this,
+                        "Sessions cleared!", Toast.LENGTH_SHORT);
+                valid.show();
+
             case R.id.action_exit:
 
                 this.finish();
@@ -191,6 +214,30 @@ public class MainActivity extends ActionBarActivity {
         tvResponse = (TextView) findViewById(R.id.tvResponse);
 
     }
+    public boolean checkSession(){
+
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String sesh = SP.getString("session", "null");
+
+        if (sesh.equals("null")) {
+            return false;
+        }
+            else{
+                return true;
+            }
+    }
 
 
+    private void logPrefSession() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String sesh = SP.getString("session", "NA");
+
+        Log.i(TAG, "Preference session is:" + sesh);
+    }
+
+    private void logProviderSession() {
+
+        Log.i(TAG, "Provider session is:");
+
+    }
 }
